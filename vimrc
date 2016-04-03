@@ -348,6 +348,12 @@ map <leader>tn :tabn<cr>
 map <leader>b :tabp<cr>
 map <leader>n :tabn<cr>
 
+"quickfix
+map <leader>qn :cn<cr>
+map <leader>qp :cp<cr>
+map <leader>qw :ccl<cr>
+map <leader>qo :cw<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files and backup
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -436,6 +442,17 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <leader>ji :YcmCompleter GoTo<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
+"*****Eclim*****"
+nnoremap <leader>jk :JavaSearch <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>jm :JavaSearchContext<CR>
+nnoremap <leader>jc :JavaSearchContext<CR><CR>:ccl<CR>
+nnoremap <leader>jv :vsp<CR>:JavaSearchContext<CR><CR>:ccl<CR>
+nnoremap <leader>js :sp<CR>:JavaSearchContext<CR><CR>:ccl<CR>
+nnoremap <leader>ja :JavaSearchContext -a<CR>
+nnoremap <leader>je :JavaCorrect<CR>
+
+let g:EclimCompletionMethod = 'omnifunc'
+
 "*****tagbar*******"
 nmap <C-t> :TagbarToggle<CR>
 
@@ -520,7 +537,8 @@ let s:licenseTag="Copyright(C) "
 let s:licenseTag=s:licenseTag."All right reserved\<enter>"
 let g:DoxygenToolkit_licenseTag=s:licenseTag
 
-"let g:DoxygenToolkit_briefTag_funcName="yes"
+" let g:DoxygenToolkit_briefTag_funcName="yes"
+let g:DoxygenToolkit_briefTag_funcName="no"
 let g:doxygen_enhanced_color=1
 let g:DoxygenToolkit_blockHeader=""
 let g:DoxygenToolkit_blockFooter=""
