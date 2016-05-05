@@ -429,9 +429,16 @@ Plugin 'majutsushi/tagbar'
 Plugin 'DoxygenToolkit.vim'
 
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 filetype plugin indent on
+
+"*****Ack*******"
+nmap <leader>aa :Ack <C-R>=expand("<cword>")<CR> *<CR>
+nmap <leader>ai :Ack -i <C-R>=expand("<cword>")<CR> *<CR>
+nmap <leader>ap :Ack <C-R>=expand("<cword>")<CR> 
+nmap <leader>aj :Ack -i <C-R>=expand("<cword>")<CR> 
 
 "*****Ycm*******"
 set completeopt=menu
@@ -516,10 +523,10 @@ vmap <silent> <leader>hr <Plug>MarkRegex
 "***************
 " MacOSX/Linux
 if MySys() == "unix" || MySys() == "mac"
-    set wildignore+=*.o,*.so,*.swp,*.zip
+    set wildignore+=*.o,*.so,*.swp,*.zip,*.class,*.obj,.git,.svn,*.jar
 else
     " Windows
-    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
+    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.obj,.git,.svn,*.jar
 endif
 
 let g:ctrlp_custom_ignore = {
