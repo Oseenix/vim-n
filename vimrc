@@ -5,6 +5,7 @@
 let performance_mode=1
 
 set nocompatible
+"set autochdir
 
 "Map space to / and c-space to ?
 map <space> /
@@ -200,6 +201,7 @@ set ruler
 
 "Show line number
 set nu
+set relativenumber
 
 "Change buffer - without saving
 set hid
@@ -278,6 +280,9 @@ else
 						\ windo call FixMiniBufExplorerTitle() |
 						\ exec oldwinnr . " wincmd w"
 		endif
+
+        au FileType java
+                    \ let g:NERDAltDelims_java=1
 	endif
 
 	" Nice window title
@@ -420,6 +425,8 @@ Plugin 'fatih/vim-go'
 
 Plugin 'The-NERD-tree'
 Plugin 'ctrlp.vim'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Auto-Pairs'
 
 Plugin 'SirVer/ultisnips'
@@ -430,9 +437,19 @@ Plugin 'DoxygenToolkit.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
 filetype plugin indent on
+
+"*****nredcommenter**********
+let g:NERDSpaceDelims=1
+
+"*****vim-multiple-cursors***
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<S-n>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 "*****Ack*******"
 nmap <leader>aa :Ack <C-R>=expand("<cword>")<CR> *<CR>
@@ -440,14 +457,18 @@ nmap <leader>ai :Ack -i <C-R>=expand("<cword>")<CR> *<CR>
 nmap <leader>ap :Ack <C-R>=expand("<cword>")<CR> 
 nmap <leader>aj :Ack -i <C-R>=expand("<cword>")<CR> 
 
-"*****Ycm*******"
+"*****Ycm youcompleteme *******"
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 set completeopt=menu
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <leader>ji :YcmCompleter GoTo<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>
+
+"python解释器路径"
+let g:ycm_path_to_python_interpreter='/usr/bin/python'
 
 "*****Eclim*****"
 nnoremap <leader>jk :JavaSearch <C-R>=expand("<cword>")<CR><CR>
@@ -529,19 +550,22 @@ else
     set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.obj,.git,.svn,*.jar
 endif
 
+imap <leader>i <Esc>:CtrlP /usr/include<CR>
+nmap <leader>i :CtrlP /usr/include<CR>
+
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|o|a)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+let g:ctrlp_working_path_mode='a'
 
 "****************
 "doxygentoolkit
 "****************
-let g:DoxygenToolkit_authorName="zhoujinze, zhoujz@bonree.com"
-
+let g:DoxygenToolkit_authorName="zhoujinze,zhoujz@bonree.com"
 let s:licenseTag="Copyright(C) "
-let s:licenseTag=s:licenseTag."All right reserved\<enter>"
+let s:licenseTag=s:licenseTag."Bonree, All right reserved\<enter>"
 let g:DoxygenToolkit_licenseTag=s:licenseTag
 
 " let g:DoxygenToolkit_briefTag_funcName="yes"
@@ -567,14 +591,14 @@ set csto=1
 set cst
 set csverb
 
-nmap <leader>cs :scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>cg :scs find g <C-R>=expand("<cword>")<CR><CR>	
-nmap <leader>cc :scs find c <C-R>=expand("<cword>")<CR><CR>	
-nmap <leader>ct :scs find t <C-R>=expand("<cword>")<CR><CR>	
-nmap <leader>ce :scs find e <C-R>=expand("<cword>")<CR><CR>	
-nmap <leader>cf :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-nmap <leader>ci :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-nmap <leader>cd :scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>ds :scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>dg :scs find g <C-R>=expand("<cword>")<CR><CR>	
+nmap <leader>dc :scs find c <C-R>=expand("<cword>")<CR><CR>	
+nmap <leader>dt :scs find t <C-R>=expand("<cword>")<CR><CR>	
+nmap <leader>de :scs find e <C-R>=expand("<cword>")<CR><CR>	
+nmap <leader>df :scs find f <C-R>=expand("<cfile>")<CR><CR>	
+nmap <leader>di :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+nmap <leader>dd :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 nmap <leader>vs :vert scs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>vg :vert scs find g <C-R>=expand("<cword>")<CR><CR>	
