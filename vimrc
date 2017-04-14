@@ -30,6 +30,7 @@ nmap <S-Up> <C-W>+<C-W>+
 "Set mapleader
 let mapleader = ","
 let g:mapleader = ","
+"set verbose=9
 
 if &term =~ '^\(xterm\|screen\)$' 
 	set t_Co=256
@@ -438,6 +439,7 @@ Plugin 'DoxygenToolkit.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'abcdnned/vim-java-commenter'
 
 call vundle#end()
 filetype plugin indent on
@@ -563,8 +565,8 @@ let g:ctrlp_working_path_mode='a'
 "****************
 "doxygentoolkit
 "****************
-let g:DoxygenToolkit_authorName="zhoujinze,zhoujz@bonree.com"
-let s:licenseTag="Copyright(C) "
+let g:DoxygenToolkit_authorName="zhoujinze"
+let s:licenseTag="Copyright(C) 2017"
 let s:licenseTag=s:licenseTag."Bonree, All right reserved\<enter>"
 let g:DoxygenToolkit_licenseTag=s:licenseTag
 
