@@ -11,7 +11,7 @@ set nocompatible
 map <space> /
 
 "Smart way to move btw. window
-map <C-j> <C-W>j
+noremap <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
@@ -27,19 +27,30 @@ nmap <S-Right> <C-W>><C-W>>
 nmap <S-Down> <C-W>-<C-W>-
 nmap <S-Up> <C-W>+<C-W>+
 
+noremap <leader>eh <C-W><<C-W><
+noremap <leader>el <C-W>><C-W>>
+noremap <leader>ej <C-W>-<C-W>-
+noremap <leader>ek <C-W>+<C-W>+
+
 "Set mapleader
 let mapleader = ","
 let g:mapleader = ","
 "set verbose=9
 "
 "fast load vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC
-nnoremap <leader>sv :source $MYVIMRC
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 onoremap k i(
 
 " esc
 inoremap jk <esc>
+
+"Fast saving
+nnoremap <leader>x :xa!<cr>
+nnoremap <leader>w :w!<cr>
+inoremap <leader>w <esc>:w<CR>
+
 "inoremap <esc> <nop>
 
 if &term =~ '^\(xterm\|screen\)$'
@@ -84,12 +95,6 @@ endif
 if exists("&mouse")
     set mouse=a "Cause the mouse cannot copy on right click
 endif
-
-
-"Fast saving
-nmap <leader>x :xa!<cr>
-nmap <leader>w :w!<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Font
@@ -420,7 +425,8 @@ set wrap
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType java setlocal foldmethod=indent
+    "autocmd FileType java setlocal foldmethod=indent
+    autocmd FileType java ia stfs static final String
 augroup END
 " }}}
 
@@ -435,16 +441,19 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/ListToggle'
 Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'EasyGrep'
 
 Plugin 'Mark--Karkat'
 Plugin 'CCTree'
 Plugin 'fatih/vim-go'
+Plugin 'winmanager--Fox'
 
 Plugin 'The-NERD-tree'
 Plugin 'ctrlp.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Auto-Pairs'
+Plugin 'ntpeters/vim-better-whitespace'
 
 Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
@@ -456,6 +465,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'abcdnned/vim-java-commenter'
+"Plugin 'suan/vim-instant-markdown'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -589,16 +599,17 @@ let g:ctrlp_working_path_mode='a'
 "doxygentoolkit
 "****************
 let g:DoxygenToolkit_authorName="zhoujinze"
-let s:licenseTag="Copyright(C) 2017"
+let s:licenseTag="Copyright(C) 2017 "
 let s:licenseTag=s:licenseTag."Bonree, All right reserved\<enter>"
 let g:DoxygenToolkit_licenseTag=s:licenseTag
 
 " let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:DoxygenToolkit_briefTag_funcName="no"
+let g:DoxygenToolkit_briefTag_pre = ""
 let g:doxygen_enhanced_color=1
 let g:DoxygenToolkit_blockHeader=""
 let g:DoxygenToolkit_blockFooter=""
-let g:DoxygenToolkit_returnTag = "@return  0 -- success, other -- failure  "
+let g:DoxygenToolkit_returnTag = "@return "
 
 imap <C-g><C-j> <Esc>:Dox <CR>
 nmap <C-g><C-j> :Dox <CR>
