@@ -11,7 +11,7 @@ set nocompatible
 map <space> /
 
 "Smart way to move btw. window
-map <C-j> <C-W>j
+noremap <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
@@ -27,19 +27,30 @@ nmap <S-Right> <C-W>><C-W>>
 nmap <S-Down> <C-W>-<C-W>-
 nmap <S-Up> <C-W>+<C-W>+
 
+noremap <leader>eh <C-W><<C-W><
+noremap <leader>el <C-W>><C-W>>
+noremap <leader>ej <C-W>-<C-W>-
+noremap <leader>ek <C-W>+<C-W>+
+
 "Set mapleader
 let mapleader = ","
 let g:mapleader = ","
 "set verbose=9
 "
 "fast load vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC
-nnoremap <leader>sv :source $MYVIMRC
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 onoremap k i(
 
 " esc
 inoremap jk <esc>
+
+"Fast saving
+nnoremap <leader>x :xa!<cr>
+nnoremap <leader>w :w!<cr>
+inoremap <leader>w <esc>:w<CR>
+
 "inoremap <esc> <nop>
 
 if &term =~ '^\(xterm\|screen\)$'
@@ -84,12 +95,6 @@ endif
 if exists("&mouse")
     set mouse=a "Cause the mouse cannot copy on right click
 endif
-
-
-"Fast saving
-nmap <leader>x :xa!<cr>
-nmap <leader>w :w!<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Font
@@ -460,6 +465,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'abcdnned/vim-java-commenter'
+"Plugin 'suan/vim-instant-markdown'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
